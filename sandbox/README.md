@@ -31,8 +31,10 @@ folder ```../lib```.
 ### scalable svg
 
 An SVG element inside a web page doesnt automatically scales if you set the
-element dimensions in percent (the contents of the svg stays the same size
-when you resize the window). This demo shows how you can update the 
+element dimensions in percent on the stylesheet (the contents of the svg stays 
+the same size when you resize the window). 
+
+This demo shows how you can update the 
 transform="scale()" attribute of a group container with javascript in order to 
 achieve auto resizing/streching.
 
