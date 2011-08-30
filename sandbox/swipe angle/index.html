@@ -1,35 +1,41 @@
 <html>
+	<LINK href="style.css" rel="stylesheet" type="text/css">
 <body>
-	<h1>Check Console Log</h1>
-	<div style="width:500px;height:500px;background-color:#EEEEEE" ontouchstart="touchstart(event);" ontouchmove="touchmove(event);" ontouchend="touchend(event);" ontouchcancel="touchcancel(event);"></div>
+	<div id="container">
+		<h1>Swipe in any direction</h1>
+		<div id='swipePad' ontouchstart="touchstart(event);" ontouchmove="touchmove(event);" ontouchend="touchend(event);" ontouchcancel="touchcancel(event);"></div>
+		<div id='info'> ... </div>
+		<div id='seta'><img src="seta.png"></div>
+	</div>
 	<script>
-	//variáveis GLOBAIS!! YEAH!
+	//Globals! (I'm a designer folks, sorry)
 	startX = 0;
 	startY = 0;
 	lastX = 0;
 	lastY = 0;
-	oneFingerOnly = false;
+	oneFingerOnly = false; // included to ignore multi-fingered touch
+	log = "";
 	
 	function touchstart(event){
-		event.preventDefault();
-		if(event.touches.length == 1){ // Only deal with one finger
+		event.preventDefault(); //lock scroll, zoom and pinch stuff inside the touch-sensitive area
+		if(event.touches.length == 1){ // one finger touchs only
 			oneFingerOnly = true;
-	    var touch = event.touches[0]; // Get the information for finger #1
-			//atualiza as variaveis iniciais
+	    var touch = event.touches[0];  // finger #1
+			//update variables
 			startX = touch.pageX;
 			startY = touch.pageY;
-			console.log('start: ' + startX + "/" + startX);
+			log = 'started at (' + startX + "," + startY + ")";
+			// console.log(log);
 	  } else {
-		oneFingerOnly = false;
-	}
+			oneFingerOnly = false;
+		}
 	}
 	function touchmove(event){
-		if(event.touches.length == 1){ // Only deal with one finger
-	    var touch = event.touches[0]; // Get the information for finger #1
-			//atualiza as variaveis enquanto mudar
+		if(event.touches.length == 1){
+	    var touch = event.touches[0];
+			//updates x and y
 			lastX = touch.pageX;
 			lastY = touch.pageY;
-			// console.log('start: ' + lastX + "/" + lastX);
 	  }
 	}
 	function touchend(event){
@@ -37,7 +43,9 @@
 			var deltaX = lastX - startX;
 			var deltaY = lastY - startY;
 			var angle = Math.atan2(deltaY,deltaX)/(Math.PI/180);
-			console.log('ended with deltaX: ' + deltaX + " and deltaY: " + deltaY + " atan2: " + angle);
+			log += ' ended at (' + lastX + "," + lastY + ") angle: " + Math.round(angle*100)/100;
+			// console.log(log);
+			document.getElementById('info').innerHTML = log;
 			document.getElementById('seta').style['-webkit-transform'] = 'rotate(' + angle + 'deg)';
 		}
 	}
@@ -45,6 +53,5 @@
 		console.log('cancel');
 	}
 	</script>
-	<div id='seta' style="background-image:url(seta.png); width:256px; height:256px;"></div>
 </body>
 </html>
