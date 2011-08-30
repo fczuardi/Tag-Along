@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./test.css">
+    <script src="../lib/svg.js" data-path="../lib/"></script>
+    <script src="./test.js"></script>
+  </head>
+
+  <body>
+    <div id="svg-container"><script type="image/svg+xml">
+        <svg id="mySVG" width="100" height="100">
+         <g id="svg-stage" transform="scale(1,1) translate(0,0)">
+          <circle
+            id="background-circle"
+            cx="50"
+            cy="50"
+            r="50"/>
+          <path
+          id="sector"
+          d="
+            M 50 50
+            L 0 50
+            A 50 50 3.14 0 0 50 100
+            Z"
+          fill="orange"/>
+         </g>
+        </svg>
+    </script></div>
+    <div id="popup">
+      <h1>Circular sectors in SVG </h1>
+      <h2>Fill the form and hit go</h2>
+      <form>
+        <label>start<input id="start" type="text" value="180"/></label>
+        <label>size<input id="size"  type="text" value="90"/></label><br/>
+        <input id="generate-btn" type="button" value="go!"/><br/>
+        <textarea id="result"></textarea>
+      </form>
+      <p>Visit <a href="https://developer.mozilla.org/en/SVG/Tutorial">Mozilla's tutorial</a> 
+        <a href="https://developer.mozilla.org/en/SVG/Tutorial/Paths#Arcs">arc section</a>
+        to learn how to create them.
+      </p>
+      <p><small>demo by <a href="http://fabricio.org">Fabricio Zuardi</a></small></p>
+    </div>
+  </body></html>

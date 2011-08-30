@@ -1,0 +1,33 @@
+body{
+  margin:0px;
+  overflow:hidden;
+}
+a{
+  color:orange;
+}
+#mySVG{
+  position:absolute;
+  top:1%;
+  left:1%;
+  border:1px solid black;
+  width:98%;
+  height:98%;
+  margin:auto;
+}
+#background-circle{
+  fill:lightgray;
+}
+#popup{
+  position:absolute;
+  top:10%;
+  left:30%;
+  width:40%;
+  padding:5%;
+  background-color:rgba(0,0,0,0.6);
+  color: #fff;
+  border-radius:10px;
+}
+#result{
+  width:80%;
+  height:13em;
+}
