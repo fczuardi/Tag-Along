@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{{page_title}}</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  
+  <!-- Must be the first script tag on the page -->
+  <script src="../static/lib/svg.js" data-path="../static/lib/"></script>
+ <script src="../static/lib/jquery-1.6.2.js"></script>
+  <link rel="stylesheet" href="../static/lib/html5_boilerplate_style.css">  
+  <link rel="stylesheet" href="../static/css/labeler.css">
+  <script src="../static/js/labeler.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div id="main" role="main">
+      <div id="top-strip">
+        <p class="left">
+          Labeled by you
+        </p>
+        <p class="right">
+          Collectively labeled so far
+        </p>
+        <img id="small-logo" src="../static/img/micro-tag.png">
+      </div>
+      <script type="image/svg+xml">
+        <svg id="buckets">
+        <defs>
+            <filter id="Matrix" filterUnits="objectBoundingBox" 
+                    x="0%" y="0%" width="100%" height="100%">
+              <feColorMatrix type="matrix" in="SourceGraphic"
+                   values="1.0 0.0 0.0 0.0 0.05 
+                           0.0 1.0 0.0 0.0 0.05 
+                           0.0 0.0 1.0 0.0 0.05 
+                           0.0 0.0 0.0 1.0 0.0"/>
+            </filter>
+          </defs>
+          <style>
+          .sector.selected{
+            filter: url(#Matrix);
+          }
+          </style>
+          <g id="svg-stage" transform="scale(1,1)">
+            <rect
+                  id="score-background"
+                  x="0"
+                  y="0"
+                  width="100"
+                  height="47"/>
+            <text 
+                  id="score-player"
+                  class="score"
+                  x="-1" y="50" 
+                  >0</text>
+            <text 
+                  id="score-all"
+                  x="101" y="50" 
+                  class="score"
+                  >0</text>
+            <path id="sector-0" class="sector" fill="#aaa" d="M 50 47 L -150.0000 47.0000 A 200 200 3.1416 0 0 -48.4847 221.0711 Z"  />
+            <path id="sector-1" class="sector" fill="#ccc" d="M 50 47 L -50.0000 220.2051 A 200 200 4.1888 0 0 151.5077 219.3258 Z" />
+            <path id="sector-2" class="sector" fill="#bbb" d="M 50 47 L 150.0000 220.2051 A 200 200 5.2360 0 0 250.0000 47.0000 Z"   />
+          </g>
+        </svg>
+      </script>
+      <div id="photos">
+        <p id="photo-throbber">•••</p>
+        <ul id="photo-strip">
+          <li id="photo-slot-3" class="photo p3"
+                ontouchstart="touchstart(event);"
+                ontouchmove="touchmove(event);"
+                ontouchend="touchend(event);"
+                ontouchcancel="touchcancel(event);">
+            <img id="photo-source-3" src="" /></li>
+          <li id="photo-slot-2" class="photo p2"
+                ontouchstart="touchstart(event);"
+                ontouchmove="touchmove(event);"
+                ontouchend="touchend(event);"
+                ontouchcancel="touchcancel(event);">
+            <img id="photo-source-2" src="" /></li>
+          <li id="photo-slot-1" class="photo p1" 
+                ontouchstart="touchstart(event);"
+                ontouchmove="touchmove(event);"
+                ontouchend="touchend(event);"
+                ontouchcancel="touchcancel(event);">
+            <img id="photo-source-1" src="#" />
+            <div id="photo-label">
+              <p id="photo-label-text"></p>
+              <div id="label-color"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> <!--! end of #container -->
+</body></html>

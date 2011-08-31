@@ -1,0 +1,254 @@
+/*
+Loading/Default
+----------------
+color 1 = #bbb
+color 2 = #ddd
+
+main colors
+-----------
+top-bar:            color 1
+top-bar .left:      #fff
+top-bar .right:     color 2
+score-background:   color 2
+score-you:          color 3
+score-all:          same as sector5
+photo-label text:   #000
+
+2 buckets
+---------
+sector0:            color 3 ou 4
+sector1:            color 5
+
+3 buckets
+---------
+sector0:            color 3
+sector1:            color 4
+sector2:            color 5
+
+4 buckets
+---------
+sector0:            color 3
+sector1:            color 1
+sector2:            color 4
+sector3:            color 5
+
+5 buckets
+---------
+sector0:            color 3
+sector1:            color 2
+sector2:            color 4
+sector3:            color 1
+sector4:            color 5
+
+*/
+body{
+  /*  background-image:url(../../../art/05-sorting-screen-label.png);*/
+  /*  opacity:0.5;*/
+  /*  background-repeat:no-repeat;*/
+  /*  background-size:100% 100%;*/
+  background-color:#ddd;
+  background-color:red;
+  font-family: 'Helvetica';
+  width:100%;
+  height:768px;
+/*  min-height:320px;*/
+/*  min-width:320px;*/
+  overflow:hidden;
+}
+ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.right{ float:right; }
+.left{ float:left; }
+#main{
+  height:100%;
+  width:100%;
+  position:absolute;
+  overflow:hidden;
+}
+/* boilerplate css adds a stupid 13px margin*/
+p{ margin:0; }
+
+/*********** REGIOES DA TELA ************/
+#top-strip{
+  color:#ddd;
+  background-color:#bbb;
+  width:100%;
+  font-size:19px;
+  height:33px;
+  padding-top:11px;
+  text-transform:lowercase;
+  letter-spacing:0.1px;
+  position:absolute;
+  z-index:10;
+  overflow:hidden;
+}
+#small-logo{
+  position:absolute;
+  right:2px;
+  opacity:0.2;
+}
+#buckets{
+  background-color:#ddd;
+  width:100%;
+  height:500%;
+  top:50%;
+  left:50%;         /*to be replaced by javascript to the px value*/
+  margin-top:-60%;  /*to be replaced by javascript to the px value*/
+  margin-left:-50%;
+  position:absolute;
+  overflow:hidden;
+}
+#photos{
+  opacity:0.5;
+/*  min-height:200px;*/
+  background-color: white;
+  width:240px;
+  height:40%;
+  top:44px;
+  left:50%;
+  margin-left:-120px;
+  position:absolute;
+}
+#photo-throbber{
+  width:100%;
+  text-align:center;
+  font-size:22px;
+  letter-spacing: 4px;
+  opacity:0.1;
+  -moz-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  -moz-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  position:absolute;
+}
+#photo-throbber.pulse{
+  opacity:0.5;
+}
+.photo{
+  width:100%;
+  text-align:center;
+  margin:auto;
+  position:absolute;
+}
+.photo img{
+  border-radius:10px;
+  -moz-box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.5);
+}
+.photo.p3{
+  top:20px;
+  left:90px;
+  width:60px;
+  height:60px;
+  line-height:60px;
+  opacity:0.5;
+  z-index: 3;
+}
+.photo.p3 img{max-width:60px;max-height:60px;}
+.photo.p2{
+  top:58px;
+  left:60px;
+  width:120px;
+  height:120px;
+  line-height:120px;
+  opacity:0.8;
+  z-index: 2;
+}
+.photo.p2 img{max-width:120px;max-height:120px;}
+.photo.p1{
+  z-index: 3;
+  top:142px;
+  line-height:240px;
+}
+.photo.p1 img{max-width:240px;max-height:240px;background-color:#f00;
+  width:240px;
+  height:240px;
+  }
+
+#photo-label{
+  position:absolute;
+  top:50%;
+  left:100%;
+  margin-left:-13px;
+  margin-top:-15px;
+  display:none;
+}
+#photo-label.skip{
+  left:50% !important;
+  margin-left:-30px !important;
+  margin-top:-15px;
+}
+#photo-label.skip p{
+  padding-left: 14px;
+}
+#photo-label.skip #label-color{
+  display:none;
+}
+#photo-label.visible{
+  display:block;
+}
+#label-color{
+  position:absolute;
+  background-color:red;
+  width:20px;
+  height:20px;
+  border-radius:15px;
+  margin-left:2px;
+  margin-top:1px;
+}
+#photo-label p{
+  position: absolute;
+  margin:0;
+  padding:6px;
+  padding-left:34px;
+  padding-right:12px;
+  margin-left:-5px;
+  margin-top:-5px;
+  line-height:21px;
+  font-size:21px;
+  background-color:#fff;
+  border-radius:15px;
+}
+
+/** Top Bar **/
+#top-strip .left{
+  margin-left:18px;
+}
+#top-strip .right{
+  margin-right:79px;
+}
+
+/** GAMBI PARA O SVG DOS BUCKETS FICAR NA ROTACAO CORRETA **/
+/*#bucket-background{
+  -moz-transform-origin:left center;
+  -webkit-transform-origin:left center;
+  margin-top: -2505px;
+  margin-left: 50%;
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+}
+*/
+/*********** PLACAR ************/
+#score-background{
+  fill:#ddd;
+}
+.score{
+  font-weight:bold;
+  font-size:35px;
+  opacity:0.5;
+}
+.score.size3{
+  font-size:26px;
+}
+#score-player{ 
+  fill:#333;
+  text-anchor:start;
+}
+#score-all{ 
+  fill:#666;
+  text-anchor:end; 
+}
