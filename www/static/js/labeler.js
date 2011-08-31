@@ -85,21 +85,20 @@ function defaultValues(){
 }
 
 function windowResized(){
-  var ww = window.innerWidth,
-      wh = window.innerHeight,
-      bh,
+  var window_width = window.innerWidth,
+      window_height = window.innerHeight,
+      body_height,
       v_align,
-      scaleW = ww/100,
-      scaleH = wh/100;
+      scaleW = window_width/100,
+      scaleH = window_height/100;
   
-  if (ww > wh) {v_align = 0.7;} else {v_align = 0.52;}
-  body_e.css('height',wh);
-  bh = body_e.height();
-  score_player_e.html(wh/2);
-  score_all_e.html(bh);
-  buckets_e.css('top',bh/2);
-  buckets_e.css('margin-top', -bh*v_align);
+  body_e.css('height',window_height);
+  body_height = body_e.height();
+  if (window_width > window_height) {v_align = 0.75;} else {v_align = 0.56;}
+  buckets_e.css('top',(body_height/2) - (body_height*v_align));
   svg_stage_e.attr('transform', 'scale('+scaleW+','+scaleW+')');
+  score_player_e.html(window_width);
+  score_all_e.html(window_height);
 }
 
 function playPhotoThrobber(){
