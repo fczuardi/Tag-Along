@@ -47,12 +47,9 @@ body{
   /*  background-repeat:no-repeat;*/
   /*  background-size:100% 100%;*/
   background-color:#ddd;
-  background-color:red;
   font-family: 'Helvetica';
   width:100%;
   height:768px;
-/*  min-height:320px;*/
-/*  min-width:320px;*/
   overflow:hidden;
 }
 ul{
@@ -95,14 +92,15 @@ p{ margin:0; }
   width:100%;
   height:500%;
   left:50%;
+  top:43px;
   margin-left:-50%;
   position:absolute;
-  overflow:hidden;
+/*  overflow:hidden;*/
 }
 #photos{
-  opacity:0.5;
+/*  opacity:0.5;*/
 /*  min-height:200px;*/
-  background-color: white;
+/*  background-color: white;*/
   width:240px;
   height:40%;
   top:44px;
@@ -130,7 +128,7 @@ p{ margin:0; }
   text-align:center;
   margin:auto;
   position:absolute;
-  background-color:#f00;
+/*  background-color:#f00;*/
 }
 .photo img{
   border-radius:10px;
@@ -144,8 +142,7 @@ p{ margin:0; }
   width:60px;
   height:60px;
   line-height:60px;
-  opacity:0.5;
-  z-index: 3;
+  z-index: 1;
 }
 .photo.p3 img{max-width:60px;max-height:60px;}
 .photo.p2{
@@ -154,7 +151,6 @@ p{ margin:0; }
   width:120px;
   height:120px;
   line-height:120px;
-  opacity:0.8;
   z-index: 2;
 }
 .photo.p2 img{max-width:120px;max-height:120px;}
@@ -236,14 +232,15 @@ p{ margin:0; }
 }
 .score{
   font-weight:bold;
-  font-size:35px; /* 2 digits */
-  font-size:27px; /* 3 digits */
-  font-size:20px; /* 4 digits */
+  font-size:40px; /* 2 digits */
   opacity:0.5;
 }
-.score.size3{
-  font-size:26px;
-}
+.score.size3{ font-size:27px; }
+.score.size4{ font-size:19px; }
+.score.size5{ font-size:15px; }
+.score.size6{ font-size:12px; }
+.score.size7{ font-size:10px; } /*ONE MILLION TAGS!*/
+
 #score-player{ 
   fill:#333;
   text-anchor:start;

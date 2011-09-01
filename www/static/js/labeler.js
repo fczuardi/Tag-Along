@@ -1,16 +1,24 @@
 //globals
-var throbber_pulse_interval;
+var config,
+    is_iPad,
+    is_iPhone,
+    is_webApp,
+    throbber_pulse_interval,
+    active_photo_container = 1,
+    queue_position = 0;
+    
 
 //DOM elements
 var body_e,
     photo_throber_e,
+    photo_items = [],
     buckets_e,
     svg_stage_e,
     score_player_e,
     score_all_e;
 
 function defaultValues(){
-  return {
+  config = {
     bucket_names: ['yes','no','maybe'],
     photos:[
       {url:'http://farm3.static.flickr.com/2538/4165413563_f0d0c161c9_m.jpg'},
@@ -89,14 +97,20 @@ function windowResized(){
       window_height = window.innerHeight,
       body_height,
       v_align,
-      scaleW = window_width/100,
-      scaleH = window_height/100;
+      scale,
+      translate;
   
-  body_e.css('height',window_height);
   body_height = body_e.height();
-  if (window_width > window_height) {v_align = 0.75;} else {v_align = 0.56;}
-  buckets_e.css('top',(body_height/2) - (body_height*v_align));
-  svg_stage_e.attr('transform', 'scale('+scaleW+','+scaleW+')');
+  if ((is_iPhone)&&(!is_webApp)){
+    //add extra body size and scroll to remove the browser bar
+    window_height = window.innerHeight + 150;
+    body_height = body_e.height() + 230;
+    main_e.css('height',body_height);
+    setTimeout(function(){window.scrollTo(0, 1);},1000);
+  }
+  scale = window_width/100;
+  translate = -2*scale;
+  svg_stage_e.attr('transform', 'scale('+scale+','+scale+') translate(0,'+translate+')');
   score_player_e.html(window_width);
   score_all_e.html(window_height);
 }
@@ -114,7 +128,10 @@ function stopPhotoThrobber(){
   photo_throber_e.css('display', 'none');
 }
 
-function sectorOver(ev){
+function getNextPhoto(){
+  console.log('getNextPhoto');
+}
+function sectorOver(){
   $(this).attr('class','sector selected');
 }
 
@@ -122,22 +139,65 @@ function sectorOut(){
   $(this).attr('class','sector');
 }
 
+function doLabel(){
+  var index = $(this).data('index');
+  console.log('doLabel');
+  
+  // var wedge_index = -1;
+  // if(ev.target.nodeName.toLowerCase() == 'path'){
+  //   wedge_index = parseInt(ev.target.id[ev.target.id.length-1],10);
+  // }else{
+  //   wedge_index = fatia -1;
+  // }
+  // if(wedge_index >= 0){
+  //   sendLabel(config.bucketnames[wedge_index]);
+  // }
+  
+  getNextPhoto();
+}
+
 function addSectorListeners(){
-  $('.sector').bind('mouseover', sectorOver);
-  $('.sector').bind('mouseout', sectorOut);
+  var sectors = $('.sector');
+  sectors.bind('mouseover', sectorOver);
+  sectors.bind('mouseout', sectorOut);
+  sectors.each(function(i, sector){
+    sector.addEventListener('click', doLabel, true);
+  });
+  
+}
+
+function resetPhotoQueue(){
+  active_photo_container = 1;
+  queue_position = 0;
+  for(i=0;i<photo_items.length;i++){
+    photo_items[i].source.attr('src','');
+    photo_items[i].source.attr('src', config.photos[queue_position+i].url);
+  }
 }
 
 function init(){
   body_e = $('body');
+  main_e = $('#main');
   photo_throber_e = $('#photo-throbber');
+  for(i=1;i<=3;i++){
+    photo_items.push({
+      'container': $('#photo-slot-'+i),
+      'source': $('#photo-source-'+i)
+    });
+  }
   buckets_e = $('#buckets');
   svg_stage_e = $('#svg-stage');
   score_player_e = $('#score-player');
   score_all_e = $('#score-all');
+  is_iPhone = (navigator.userAgent.match(/iPhone/i) !== null);
+  is_iPad = (navigator.userAgent.match(/iPad/i) !== null);
+  is_webApp = (window.navigator.standalone === true);
   // playPhotoThrobber();
+  defaultValues();
   addSectorListeners();
   window.addEventListener('resize', windowResized, true);
   windowResized();
+  resetPhotoQueue();
 }
 
 $(init);
