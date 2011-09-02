@@ -13,6 +13,9 @@ var body_e,
     photo_throber_e,
     photo_items = [],
     buckets_e,
+    photo_label_e,
+    photo_label_text_e,
+    label_color_e,
     svg_stage_e,
     score_player_e,
     score_all_e;
@@ -131,8 +134,17 @@ function stopPhotoThrobber(){
 function getNextPhoto(){
   console.log('getNextPhoto');
 }
+
+
+
 function sectorOver(){
+  var sector = $(this),
+      index = sector.data('index');
   $(this).attr('class','sector selected');
+  photo_label_e.css('display', 'block');
+  photo_label_text_e.html(config.bucket_names[index]);
+  photo_label_e.removeClass('skip');
+  label_color_e.css('background-color', sector.attr('fill'));
 }
 
 function sectorOut(){
@@ -189,9 +201,17 @@ function init(){
   svg_stage_e = $('#svg-stage');
   score_player_e = $('#score-player');
   score_all_e = $('#score-all');
+  photo_label_e = $('#photo-label');
+  photo_label_text_e = $('#photo-label-text');
+  label_color_e = $('#label-color');
+  
   is_iPhone = (navigator.userAgent.match(/iPhone/i) !== null);
   is_iPad = (navigator.userAgent.match(/iPad/i) !== null);
   is_webApp = (window.navigator.standalone === true);
+  if (is_iPhone){ is_iPhone = true; body_e.addClass('iphone');}
+  if (is_iPad){ body_e.addClass('ipad');}
+  if (is_webApp){ body_e.addClass('web-app');}
+  
   // playPhotoThrobber();
   defaultValues();
   addSectorListeners();
